@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio 34C - Watercolor Modern Instrumentals</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary-light': '#f7f3f0',
+            'secondary-light': '#ffffff',
+            'text-dark': '#333333',
+            'accent-watercolor': '#b16c5c',
+            'accent-dark': '#8e5e52',
+            'soft-gray': '#e0dcd9',
+            'dark-overlay': 'rgba(0,0,0,0.1)'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #f7f3f0;
+      color: #333;
+      line-height: 1.6;
+      background-image:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><ellipse cx="200" cy="150" rx="180" ry="120" fill="#e0c0b8" opacity="0.4"/><ellipse cx="1200" cy="650" rx="220" ry="160" fill="#c19e8e" opacity="0.3"/><path d="M0 400C300 150 700 750 1440 400V800H0V400Z" fill="#f0d4cc" opacity="0.6"/></svg>');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center center;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f7f3f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b16c5c;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #cd8a77;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <div id="messageBox" class="hidden fixed top-0 left-0 right-0 z-50 p-4 bg-green-500/90 text-white shadow-xl justify-center items-center rounded-b-lg">
+    <p id="messageText" class="text-lg font-semibold"></p>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-secondary-light/80 backdrop-blur-md shadow-sm border-b border-soft-gray">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <a href="#" class="text-4xl font-extrabold tracking-wide text-text-dark">STUDIO <span class="text-accent-watercolor">34C</span></a>
+      <nav class="hidden md:flex space-x-10">
+        <a href="#instrumentals" class="text-gray-600 hover:text-accent-watercolor transition font-medium text-lg">Beats</a>
+        <a href="#upload" class="text-gray-600 hover:text-accent-watercolor transition font-medium text-lg">Upload</a>
+        <a href="#contact" class="text-gray-600 hover:text-accent-watercolor transition font-medium text-lg">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative pt-24 pb-32 text-center overflow-hidden">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-6xl sm:text-8xl font-extrabold leading-tight mb-6 text-text-dark">
+          Artistry in <span class="text-accent-watercolor block md:inline-block">Every Beat.</span>
+        </h1>
+        <p class="text-2xl text-gray-700 mb-10 mx-auto font-light max-w-2xl">
+          Handcrafted instrumentals to inspire and define your sound.<br>Discover unique sonic canvases.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center space-y-5 sm:space-y-0 sm:space-x-6">
+          <a href="#instrumentals" class="px-10 py-4 bg-accent-watercolor hover:bg-accent-dark text-white font-bold rounded-full transition shadow-xl">Explore Soundscapes</a>
+          <a href="#contact" class="px-10 py-4 bg-secondary-light text-text-dark font-bold rounded-full border border-soft-gray hover:border-accent-watercolor transition shadow">Custom Commissions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Track Listing -->
+    <section id="instrumentals" class="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-5xl font-extrabold text-center mb-6 text-text-dark">The Artistry Collection</h2>
+      <p class="text-xl text-center text-gray-700 mb-10 max-w-3xl mx-auto">
+        Explore a curated selection of instrumentals, each a unique sonic painting designed to ignite your creativity.
+      </p>
+      <div id="instrumentalsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Track cards injected here by JS -->
+      </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="upload" class="py-20 md:py-28 bg-secondary-light border-y border-soft-gray">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-extrabold mb-6 text-accent-watercolor">Upload Your Instrumental</h2>
+        <p class="text-gray-700 text-lg mb-8">
+          Add a new track to your collection.<br>(Demo: tracks become visible instantly. For production, backend required for file handling.)
+        </p>
+        <form id="uploadForm" class="bg-primary-light p-8 rounded-xl shadow border border-soft-gray text-left">
+          <div class="mb-4">
+            <label class="block text-md font-semibold text-gray-700 mb-2">Track Name</label>
+            <input type="text" id="trackName" required class="w-full p-3 bg-secondary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-md font-semibold text-gray-700 mb-2">Genre</label>
+            <input type="text" id="trackGenre" required class="w-full p-3 bg-secondary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-md font-semibold text-gray-700 mb-2">BPM</label>
+            <input type="number" id="trackBpm" min="40" max="300" required class="w-full p-3 bg-secondary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-md font-semibold text-gray-700 mb-2">Price (e.g. $29.99)</label>
+            <input type="text" id="trackPrice" required class="w-full p-3 bg-secondary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+          </div>
+          <div class="mb-6">
+            <label class="block text-md font-semibold text-gray-700 mb-2">Audio File (MP3/WAV)</label>
+            <input type="file" id="trackAudio" accept="audio/mpeg,audio/wav,audio/mp3" required class="w-full text-md border border-soft-gray rounded-lg cursor-pointer py-2 px-1" />
+          </div>
+          <button type="submit" class="w-full py-4 bg-accent-watercolor hover:bg-accent-dark text-white font-bold rounded-xl transition shadow-lg transform hover:scale-[1.01] text-xl">Upload Track</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-28 max-w-4xl mx-auto px-4">
+      <h2 class="text-5xl font-extrabold text-center mb-6 text-text-dark">Create With Us</h2>
+      <p class="text-xl text-center text-gray-700 mb-16 max-w-3xl mx-auto">
+        Whether for a specific project or a custom masterpiece, let's bring your auditory dreams to life.
+      </p>
+      <form id="contactForm" class="bg-secondary-light p-10 rounded-2xl shadow-xl border border-soft-gray max-w-2xl mx-auto">
+        <div class="mb-8">
+          <label for="name" class="block text-md font-medium text-gray-700 mb-2">Your Name</label>
+          <input type="text" id="contactName" name="name" required class="w-full p-4 bg-primary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+        </div>
+        <div class="mb-8">
+          <label for="email" class="block text-md font-medium text-gray-700 mb-2">Your Email</label>
+          <input type="email" id="contactEmail" name="email" required class="w-full p-4 bg-primary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor" />
+        </div>
+        <div class="mb-8">
+          <label for="subject" class="block text-md font-medium text-gray-700 mb-2">Subject</label>
+          <select id="contactSubject" name="subject" required class="w-full p-4 bg-primary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor">
+            <option value="licensing">Licensing Inquiry</option>
+            <option value="custom">Custom Beat Commission</option>
+            <option value="general">General Collaboration</option>
+          </select>
+        </div>
+        <div class="mb-10">
+          <label for="message" class="block text-md font-medium text-gray-700 mb-2">Your Message</label>
+          <textarea id="contactMessage" name="message" rows="6" required class="w-full p-4 bg-primary-light border border-soft-gray rounded-lg focus:ring-accent-watercolor focus:border-accent-watercolor"></textarea>
+        </div>
+        <button type="submit" class="w-full py-4 bg-accent-watercolor hover:bg-accent-dark text-white font-bold rounded-xl transition shadow-lg transform hover:scale-[1.01] text-xl">Send My Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bg-primary-light border-t border-soft-gray mt-16 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-2xl font-extrabold tracking-wider text-text-dark mb-3">STUDIO <span class="text-accent-watercolor">34C</span></p>
+      <p class="text-gray-500 text-sm">© 2025 Studio 34C. All Rights Reserved. | Crafted with <span class="text-red-500">♥</span> and creativity.</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Example starting tracks (audio from SoundHelix for demo, use your own in production)
+    let trackList = [
+      {
+        id: 'track1',
+        name: 'Drifting Petals',
+        genre: 'Lofi / Chillwave',
+        bpm: 80,
+        price: '$24.99',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+      },
+      {
+        id: 'track2',
+        name: 'Crimson Tide',
+        genre: 'Ambient / Cinematic',
+        bpm: 65,
+        price: '$44.99',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+      },
+      {
+        id: 'track3',
+        name: 'Urban Canvas',
+        genre: 'Hip Hop / Soul',
+        bpm: 92,
+        price: '$34.99',
+        audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+      }
+    ];
+
+    // UI components
+    const instrumentalsContainer = document.getElementById('instrumentalsContainer');
+    let currentTrackId = null;
+
+    function renderTracks() {
+      instrumentalsContainer.innerHTML = '';
+      trackList.forEach(track => {
+        const card = document.createElement('div');
+        card.className = 'bg-secondary-light p-6 rounded-2xl shadow-lg flex flex-col group border border-soft-gray transition hover:scale-[1.02] hover:shadow-xl hover:shadow-accent-watercolor/20';
+        card.innerHTML = `
+          <div class="flex flex-col h-full gap-2">
+            <h3 class="text-3xl font-bold text-text-dark mb-1">${track.name}</h3>
+            <p class="text-accent-watercolor text-md font-semibold uppercase tracking-wider mb-2">${track.genre}</p>
+            <div class="flex items-center text-gray-500 text-sm mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-accent-watercolor" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>
+              ${track.bpm} BPM
+            </div>
+            <audio id="audio-${track.id}" src="${track.audioUrl}" preload="auto" class="w-full mt-2" style="outline:none;"></audio>
+            <div class="flex items-center justify-between mt-auto pt-4 border-t border-soft-gray gap-3">
+              <span class="text-3xl font-extrabold text-accent-dark">${track.price}</span>
+              <button class="play-btn flex items-center justify-center w-14 h-14 rounded-full bg-soft-gray text-accent-watercolor transition hover:bg-accent-watercolor hover:text-white" data-track-id="${track.id}" title="Play/Pause">
+                <svg class="play-icon w-7 h-7 ${track.id === currentTrackId ? 'hidden' : ''}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                </svg>
+                <svg class="pause-icon w-7 h-7 ${track.id === currentTrackId ? '' : 'hidden'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+              <button class="add-cart-btn px-4 py-2 bg-accent-watercolor text-white font-bold rounded-lg transition hover:bg-accent-dark shadow" data-track-id="${track.id}" title="Add to Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M16 11V7a4 4 0 00-8 0v4m8 0a2 2 0 11-4 0m4 0H8m4 0a2 2 0 114 0z" />
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        `;
+        instrumentalsContainer.appendChild(card);
+      });
+      attachTrackListeners();
+    }
+
+    function attachTrackListeners() {
+      document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.onclick = function() {
+          let trackId = btn.dataset.trackId;
+          let audioElem = document.getElementById('audio-' + trackId);
+          document.querySelectorAll('audio').forEach(a => {
+            if (a.id !== 'audio-' + trackId) {
+              a.pause(); a.currentTime = 0;
+              let pbtn = a.parentElement.querySelector('.play-btn');
+              if (pbtn) {
+                pbtn.querySelector('.play-icon').classList.remove('hidden');
+                pbtn.querySelector('.pause-icon').classList.add('hidden');
+              }
+            }
+          });
+          if (audioElem.paused) {
+            audioElem.play();
+            currentTrackId = trackId;
+            btn.querySelector('.play-icon').classList.add('hidden');
+            btn.querySelector('.pause-icon').classList.remove('hidden');
+          } else {
+            audioElem.pause();
+            btn.querySelector('.play-icon').classList.remove('hidden');
+            btn.querySelector('.pause-icon').classList.add('hidden');
+            currentTrackId = null;
+          }
+        }
+      });
+
+      document.querySelectorAll('.add-cart-btn').forEach(btn => {
+        btn.onclick = function() {
+          let trackId = btn.dataset.trackId;
+          let track = trackList.find(t => t.id == trackId);
+          showMessage(`Added "${track.name}" to cart! Checkout coming soon.`);
+        }
+      });
+    }
+
+    function showMessage(msg) {
+      let box = document.getElementById('messageBox');
+      let txt = document.getElementById('messageText');
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      box.classList.add('flex');
+      setTimeout(() => {
+        box.classList.add('hidden');
+        box.classList.remove('flex');
+      }, 2500);
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('trackName').value.trim();
+      const genre = document.getElementById('trackGenre').value.trim();
+      const bpm = document.getElementById('trackBpm').value.trim();
+      const price = document.getElementById('trackPrice').value.trim();
+      const audioFile = document.getElementById('trackAudio').files[0];
+      if (!name || !genre || !bpm || !price || !audioFile) {
+        showMessage('Please fill all fields and select a valid audio file.');
+        return;
+      }
+      const localAudioUrl = URL.createObjectURL(audioFile);
+      trackList.push({
+        id: 'track' + (trackList.length + 1),
+        name,
+        genre,
+        bpm,
+        price,
+        audioUrl: localAudioUrl
+      });
+      renderTracks();
+      showMessage(`Instrumental "${name}" uploaded!`);
+      this.reset();
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      showMessage('Thank you for getting in touch! We will reply soon.');
+      this.reset();
+      // For production: send to backend/email system here
+    });
+
+    renderTracks();
+  </script>
+</body>
+</html>
